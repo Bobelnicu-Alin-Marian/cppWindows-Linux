@@ -11,7 +11,7 @@ void threadWhite(ResourceController& controller, int id) {
 
     controller.enterWhite(id);
 
-    // FOLOSIREA RESURSEI (Munca simulata)
+    // FOLOSIREA RESURSEI
     std::this_thread::sleep_for(std::chrono::milliseconds(100 + rand() % 200));
 
     controller.exitWhite(id);
@@ -57,3 +57,4 @@ int main() {
     std::cout << "=== Simulare finalizata. ===\n";
     return 0;
 }
+
