@@ -4,20 +4,20 @@
 #include <chrono>
 #include "ResourceController.h" 
 
-// Func?ia executat? de thread-ul ALB
+// Functia executata de thread-ul ALB
 void threadWhite(ResourceController& controller, int id) {
     // Simulare sosire
     std::this_thread::sleep_for(std::chrono::milliseconds(rand() % 100));
 
     controller.enterWhite(id);
 
-    // FOLOSIREA RESURSEI (Munc? simulat?)
+    // FOLOSIREA RESURSEI (Munca simulata)
     std::this_thread::sleep_for(std::chrono::milliseconds(100 + rand() % 200));
 
     controller.exitWhite(id);
 }
 
-// Func?ia executat? de thread-ul NEGRU
+// Functia executata de thread-ul NEGRU
 void threadBlack(ResourceController& controller, int id) {
     std::this_thread::sleep_for(std::chrono::milliseconds(rand() % 100));
 
@@ -38,16 +38,16 @@ int main() {
     std::cout << "=== Pornire Simulare (Metoda Perechi) ===\n";
 
     for (int i = 0; i < numar_perechi; ++i) {
-        // La fiecare pas al buclei, cre?m o pereche (un Alb ?i un Negru)
+        // La fiecare pas al buclei, cream o pereche (un Alb si un Negru)
 
-        // Cre?m firul ALB
+        // Cream firul ALB
         threads.emplace_back(threadWhite, std::ref(controller), i);
 
-        // Cre?m firul NEGRU
+        // Cream firul NEGRU
         threads.emplace_back(threadBlack, std::ref(controller), i);
     }
 
-    // A?tept?m finalizarea tuturor
+    // Asteptam finalizarea tuturor
     for (auto& t : threads) {
         if (t.joinable()) {
             t.join();
