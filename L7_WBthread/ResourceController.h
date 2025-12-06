@@ -7,15 +7,15 @@ enum Color { NONE, WHITE, BLACK };
 
 class ResourceController {
 private:
-    std::mutex mtx;                 // Lac?tul pentru zona critic?
-    std::condition_variable cv;     // Sala de a?teptare pentru thread-uri
+    std::mutex mtx;                 // Lock pentru zona critica
+    std::condition_variable cv;     // threadurile asteapta
 
-    int active_white;   // Albi în?untru
-    int active_black;   // Negri în?untru
-    int waiting_white;  // Albi la coad?
-    int waiting_black;  // Negri la coad?
+    int active_white;   // Albi activi
+    int active_black;   // Negri activi
+    int waiting_white;  // Albi la coada
+    int waiting_black;  // Negri la coada
 
-    Color next_turn;    // Variabil? anti-înfometare (Starvation protection)
+    Color next_turn;    // Starvation protection
 
 public:
     // Constructor
@@ -28,4 +28,5 @@ public:
     // Metode pentru firele NEGRE
     void enterBlack(int id);
     void exitBlack(int id);
+
 };
